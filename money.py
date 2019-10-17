@@ -58,15 +58,19 @@ class Money:
         Should use the currency symbol if available, else use the code.
         Use the currency digits to determine number of digits to show.
         """
+
         if self.currency.symbol:
-            if int == type(self.amount):
-                return f"{self.currency.symbol}{self.amount}.{self.currency.digits * '0'}"
-            elif float == type(self.amount):
-                pass
-        elif not self.currency.symbol:
-            amount_string = str(self.amount)
-            long_string = f"{amount_string}{self.currency.digits * '0'}"
-            return f"{self.currency.code} {long_string[:self.currency.digits +2]}"
+            return f"{self.currency.symbol}{self.amount:.{self.currency.digits}f}"
+        return f"{self.currency.code} {self.amount:.{self.currency.digits}f}"
+        # if self.currency.symbol:
+        #     if int == type(self.amount):
+        #         return f"{self.currency.symbol}{self.amount}.{self.currency.digits * '0'}"
+        #     elif float == type(self.amount):
+        #         pass
+        # elif not self.currency.symbol:
+        #     amount_string = str(self.amount)
+        #     long_string = f"{amount_string}{self.currency.digits * '0'}"
+        #     return f"{self.currency.code} {long_string[:self.currency.digits +2]}"
 
     def __repr__(self):
         return f"<Money {str(self)}>"
